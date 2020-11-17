@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# AppMan Pokédex (My Pokémon cards list)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+We want you to build a web application with the following requirements:
 
-## Available Scripts
+| User Story | Acceptance Criteria |
+|:---|:---|
+|As a user, I want to see my Pokédex, so that I can build a list of Pokémon cards that I like.|- I can see the list of my Pokémon cards.<br>- I can add a Pokémon card to my Pokédex from search result list.<br>- I can remove a Pokémon card from my Pokédex.|
+|As a user, I want to be able to search for a Pokémon card, so that I can add it into my Pokédex.|- I can search based on Pokémon name.<br>- I can search based on Pokémon type.|
+|As a user, I want to see only unselected Pokémon cards on the search list, so that I can select a different Pokémon card.|- I can see only unselect Pokémon cards on the result list.|
+|As a user, I want to cancel adding a Pokémon to my Pokédex, so that I can close the Pokémon list modal.|- I can close the Pokémon list modal by clicking outside.|
+|As a user, I want to see the details of each Pokémon, so that I can see the abilities of a Pokémon.|- I can see HP level of a Pokémon.<br>- I can see Strength level of a Pokémon.<br>- I can see Weakness level of a Pokémon.<br>- I can see Happiness level of a Pokémon.|
 
-In the project directory, you can run:
+## Limitation
+- Good news!! Support only on iPad (1024x768) screen size :)) no RESPONSIVE!!
 
-### `npm start`
+## Also, we already prepared some stuff for you!!! :D
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1. Base project (includes iPad layout screen, so cool!!)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 2. Service API
+  - You can run service api by `yarn run api`
+  - The endpoint to get Pokémon list is `[GET]http://localhost:3030/api/cards`
+  - query
+    - limit: default 20 item/
+    - name: search monster by name
+    - type: search monster by type
+    - example: http://localhost:3030/api/cards?limit=30&name=picha&type=normal
 
-### `npm test`
+### 3. How to calculate `HP level`, `Strength level`, `Weakness level` and `Happiness level`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - HP level calculation
+      - maximum is 100. if value is higher than 100 set it to 100, otherwise 0.
+  - Strength level calculation
+      - use `attacks` length to multiply by 50, maximum is 100. e.g. if value is 1 set it to 50, 2 set it to 100, otherwise 0.
+  - Weakness level calculation
+      - use `weaknesses` length multiply by 100, maximum is 100. e.g. if value is 1 set it to 100, otherwise 0.
+  - Damage calculation
+      - use `damage` value without symbol of all attacks skill. e.g. 50+ set it to 50, 20* set it to 20, otherwise 0.
+  - Happiness level calculation
+      - ((HP / 10) + (Damage /10 ) + 10 - (Weakness)) / 5
+      
+  #### Example
+    Pikachu {
+      name: 'Pikachu',
+      hp: 110,
+      attacks: [
+        { name: 'attack A', damage: '20+'},
+        { name: 'attack B', damage: '40x'}
+      ],
+      weaknesses: [
+        { name: 'weakness A'},
+      ]
+    }
+  
+    Output {
+      hp: 100,
+      strength: '100%',
+      weakness: '50%',
+      damage: 60,
+      happiness: 5
+    }
+### 4. Interactive MockUp (as a .gif file)
 
-### `npm run build`
+![Pokédex MockUp](screenshot/exam-crop.gif)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 5. Fonts (from Google Fonts)
+  - `Atma:700`
+  - `Gaegu`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 6. Color codes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Pokédex MockUp](screenshot/color-codes.png)
 
-### `npm run eject`
+## How we score you??!!!
+  - If you can complete all the requirements above, We surely score you 100!!!! NO reason!!
+    - We will give you all the feedback later ;)
+  - IF YOU FEEL LIKE SOMETHING IS MISSING, WE HAVE EXTRA SCORE FOR ANY ADDITIONAL THING YOU CAN PROVIDE. (Extra can be unit test, refactoring, performance tuning, etc. REMEMBER MAXIMUM IS NOT 100!!!)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you have any questions, please do not hesitate to ask us anytime.
+Wish you luck!! :)
